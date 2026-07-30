@@ -161,7 +161,7 @@ def simulate():
         elif avg_predicted >= 20:
             congestion_level = "High"
             congestion_color = "#dc2626"
-            recommendation = "Activate alternate route suggestions. Extend green phases on main arterial."
+            recommendation = "Activate alternate route suggestions. Extend green phases on MG Road."
         else:
             congestion_level = "Severe"
             congestion_color = "#7f1d1d"
