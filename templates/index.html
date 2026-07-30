@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart City Traffic Forecasting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    
+    <div class="dashboard-wrapper">
+        <header>
+            <h1>Smart City Traffic Forecasting System</h1>
+            <p class="subtitle">Deep Learning Traffic Management & Congestion Analysis</p>
+        </header>
+
+        <div class="grid-container">
+            <!-- Left Column: Main Chart -->
+            <div class="main-column">
+                <div class="card">
+                    <h2>Live Congestion Forecast (Main Arterial Road)</h2>
+                    <p class="info-text">
+                        This system uses a PyTorch Time-Series Transformer to analyze complex spatial-temporal traffic dependencies. By forecasting congestion 15-30 minutes into the future, city planners can dynamically adjust traffic light phases, route emergency vehicles efficiently, and reduce overall carbon emissions.
+                    </p>
+                    
+                    <div class="chart-container">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Controls and Context -->
+            <div class="sidebar">
+                <div class="card">
+                    <h2>Model Inference</h2>
+                    <p class="info-text">Query the Transformer model for the next 15-minute congestion prediction.</p>
+                    <button id="refresh-btn" class="primary-btn">Run AI Forecast</button>
+                    <div id="loading" class="hidden">Calculating predictions...</div>
+                </div>
+
+                <div class="card">
+                    <h2>Current Status</h2>
+                    <div class="metrics-container">
+                        <div class="metric-box">
+                            <div class="metric-title">Current Speed</div>
+                            <div class="metric-value highlight-green" id="current-speed">-- km/h</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-title">Predicted 15-Min Speed</div>
+                            <div class="metric-value highlight-orange" id="forecast-speed">-- km/h</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Real-World Applications</h2>
+                    <ul class="context-list">
+                        <li><strong>Adaptive Traffic Lights:</strong> Preemptively alters light cycles before a predicted jam occurs.</li>
+                        <li><strong>Route Optimization:</strong> Feeds data to navigation systems to reroute drivers away from emerging bottlenecks.</li>
+                        <li><strong>Emissions Control:</strong> Reduces vehicle idling time, significantly lowering city greenhouse gas emissions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========= WHAT-IF SCENARIO SIMULATOR ========= -->
+        <div class="simulator-section">
+            <div class="card">
+                <h2>What-If Scenario Simulator</h2>
+                <p class="info-text">
+                    Drag the slider to simulate different traffic conditions. The system feeds your chosen speed into the trained Transformer model in real time 
+                    and predicts how congestion will evolve over the next 15 minutes. This demonstrates how the AI responds to sudden changes like accidents, events, or road closures.
+                </p>
+
+                <div class="slider-row">
+                    <div class="slider-label-group">
+                        <span class="slider-label">Simulated Current Speed</span>
+                        <span class="slider-value" id="slider-value-display">40 km/h</span>
+                    </div>
+                    <input type="range" id="speed-slider" min="5" max="70" value="40" step="1" class="speed-slider">
+                    <div class="slider-hints">
+                        <span>5 km/h (Gridlock)</span>
+                        <span>70 km/h (Free Flow)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="simulator-grid">
+                <!-- Simulator Chart -->
+                <div class="card">
+                    <h2>AI Predicted Outcome</h2>
+                    <div class="chart-container">
+                        <canvas id="simulatorChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Analysis Panel -->
+                <div class="card analysis-panel">
+                    <h2>Live Analysis</h2>
+                    <div class="analysis-item">
+                        <div class="analysis-label">Congestion Level</div>
+                        <div class="analysis-value" id="sim-congestion-level">--</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-label">Avg. Predicted Speed</div>
+                        <div class="analysis-value" id="sim-avg-speed">-- km/h</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-label">Est. Recovery Time</div>
+                        <div class="analysis-value" id="sim-recovery">-- min</div>
+                    </div>
+                    <div class="recommendation-box" id="sim-recommendation">
+                        Move the slider to run a scenario.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Deep Learning Based Urban Traffic Congestion Forecasting Using Transformer Models &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
